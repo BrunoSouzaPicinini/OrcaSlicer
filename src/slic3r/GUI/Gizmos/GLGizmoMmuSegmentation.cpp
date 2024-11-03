@@ -482,7 +482,7 @@ void GLGizmoMmuSegmentation::on_render_input_window(float x, float y, float bott
         color_button_high = ImGui::GetCursorPos().y - color_button - 2.0;
         if (color_picked) { m_selected_extruder_idx = extruder_idx; }
 
-        if (extruder_idx < 16 && ImGui::IsItemHovered()) m_imgui->tooltip(_L("Shortcut Key ") + std::to_string(extruder_idx + 1), max_tooltip_width);
+        if (extruder_idx < 21 && ImGui::IsItemHovered()) m_imgui->tooltip(_L("Shortcut Key ") + std::to_string(extruder_idx + 1), max_tooltip_width);
 
         // draw filament id
         float gray = 0.299 * extruder_color.r() + 0.587 * extruder_color.g() + 0.114 * extruder_color.b();

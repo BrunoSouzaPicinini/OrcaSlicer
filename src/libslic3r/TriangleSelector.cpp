@@ -1669,12 +1669,12 @@ TriangleSelector::TriangleSplittingData TriangleSelector::serialize() const {
                     data.used_states[n] = true;
 
                 if (n >= 3) {
-                    assert(n <= 16);
-                    if (n <= 16) {
-                        // Store "11" plus 4 bits of (n-3).
+                    assert(n <= 21);
+                    if (n <= 21) {
+                        // Store "11" plus 5 bits of (n-3).
                         data.bitstream.insert(data.bitstream.end(), { true, true });
                         n -= 3;
-                        for (size_t bit_idx = 0; bit_idx < 4; ++bit_idx)
+                        for (size_t bit_idx = 0; bit_idx < 5; ++bit_idx)
                             data.bitstream.push_back(n & (uint64_t(0b0001) << bit_idx));
                     }
                 } else {
@@ -1712,9 +1712,9 @@ void TriangleSelector::deserialize(const TriangleSplittingData& data, bool needs
             return;
         }
     }
-    // Reserve number of triangles as if each triangle was saved with 4 bits.
+    // Reserve number of triangles as if each triangle was saved with 5 bits.
     // With MMU painting this estimate may be somehow low, but better than nothing.
-    m_triangles.reserve(std::max(m_mesh.its.indices.size(), data.bitstream.size() / 4));
+    m_triangles.reserve(std::max(m_mesh.its.indices.size(), data.bitstream.size() / 5));
     // Number of triangles is twice the number of vertices on a large manifold mesh of genus zero.
     // Here the triangles count account for both the nodes and leaves, thus the following line may overestimate.
     m_vertices.reserve(std::max(m_mesh.its.vertices.size(), m_triangles.size() / 2));
@@ -1735,7 +1735,7 @@ void TriangleSelector::deserialize(const TriangleSplittingData& data, bool needs
         assert(ibit < int(data.bitstream.size()));
         auto next_nibble = [&data, &ibit = ibit]() {
             int n = 0;
-            for (int i = 0; i < 4; ++ i)
+            for (int i = 0; i < 5; ++ i)
                 n |= data.bitstream[ibit ++] << i;
             return n;
         };

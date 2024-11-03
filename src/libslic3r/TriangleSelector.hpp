@@ -15,7 +15,7 @@ enum class EnforcerBlockerType : int8_t {
     NONE      = 0,
     ENFORCER  = 1,
     BLOCKER   = 2,
-    // Maximum is 15. The value is serialized in TriangleSelector into 6 bits using a 2 bit prefix code.
+    // Maximum is 21. The value is serialized in TriangleSelector into 6 bits using a 2 bit prefix code.
     Extruder1 = ENFORCER,
     Extruder2 = BLOCKER,
     Extruder3,
@@ -32,7 +32,12 @@ enum class EnforcerBlockerType : int8_t {
     Extruder14,
     Extruder15,
     Extruder16,
-    ExtruderMax = Extruder16
+    Extruder17,
+    Extruder18,
+    Extruder19,
+    Extruder20,
+    Extruder21,
+    ExtruderMax = Extruder21
 };
 
 // Following class holds information about selected triangles. It also has power

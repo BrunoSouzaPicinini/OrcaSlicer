@@ -77,7 +77,7 @@ public:
     // EXTRUDER_LIMIT + 1 states are used to storing the painting because also uncolored triangles are stored.
     // When increasing EXTRUDER_LIMIT, it needs to ensure that TriangleSelector::serialization/deserialization
     // will be also extended to support additional states, requiring at least one state to remain free out of 19 states.
-    static const constexpr size_t EXTRUDERS_LIMIT = 16;
+    static const constexpr size_t EXTRUDERS_LIMIT = 21;
 
     const float get_cursor_radius_min() const override { return CursorRadiusMin; }
 
